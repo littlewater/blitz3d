@@ -250,23 +250,23 @@ Editor *MainFrame::getEditor( int n ){
 	return it==editors.end() ? 0 : it->second;
 }
 
-HtmlHelp *MainFrame::getHelp( int n ){
-	map<CWnd*,HtmlHelp*>::iterator it=helps.find( tabber.getTabWnd( n ) );
+Htmlhelp *MainFrame::getHelp( int n ){
+	map<CWnd*,Htmlhelp*>::iterator it=helps.find( tabber.getTabWnd( n ) );
 	return it==helps.end() ? 0 : it->second;
 }
 
-HtmlHelp *MainFrame::getHelp(){
+Htmlhelp *MainFrame::getHelp(){
 	return getHelp( tabber.getCurrent() );
 }
 
-HtmlHelp *MainFrame::findHelp(){
+Htmlhelp *MainFrame::findHelp(){
 	int n;
-	HtmlHelp *h;
+	Htmlhelp *h;
 	for( n=0;n<tabber.size();++n ){
 		if( h=getHelp( n ) ) break;
 	}
 	if( n==tabber.size() ){
-		h=new HtmlHelp( this );
+		h=new Htmlhelp( this );
 		h->Create( 0,"Help",WS_CHILD|WS_BORDER,CRect( 0,0,0,0 ),&tabber,1 );
 		helps[h]=h;
 		tabber.insert( n,h,"Help" );
@@ -287,10 +287,10 @@ void MainFrame::cursorMoved( Editor *editor ){
 void MainFrame::currentSet( Tabber *tabber,int index ){
 	if( Editor *e=getEditor() ){
 		string t=e->getName();
-		if( !t.size() ) t="<untitled>";
+		if( !t.size() ) t=string("<untitled>");
 		setTitle( t );
 		cursorMoved( e );
-	}else if( HtmlHelp *h=getHelp() ){
+	}else if( Htmlhelp *h=getHelp() ){
 		setTitle( h->getTitle() );
 		statusBar.SetPaneText( 1,"" );
 	}else{
@@ -299,12 +299,12 @@ void MainFrame::currentSet( Tabber *tabber,int index ){
 	}
 }
 
-void MainFrame::helpOpen( HtmlHelp *help,const string &file ){
+void MainFrame::helpOpen( Htmlhelp *help,const string &file ){
 	open( file );
 }
 
-void MainFrame::helpTitleChange( HtmlHelp *help,const string &title ){
-	if( HtmlHelp *h=getHelp() ) setTitle( h->getTitle() );
+void MainFrame::helpTitleChange( Htmlhelp *help,const string &title ){
+	if( Htmlhelp *h=getHelp() ) setTitle( h->getTitle() );
 }
 
 void MainFrame::insertRecent( const string &file ){
@@ -428,7 +428,7 @@ bool MainFrame::close( int n ){
 		e->DestroyWindow();
 		editors.erase( e );
 		delete e;
-	}else if( HtmlHelp *h=getHelp( n ) ){
+	}else if( Htmlhelp *h=getHelp( n ) ){
 	}
 	return true;
 }
@@ -776,23 +776,23 @@ void MainFrame::programDebug(){
 }
 
 void MainFrame::helpHome(){
-	HtmlHelp *h=findHelp();
+	Htmlhelp *h=findHelp();
 	string t;
 	t="index.html";
 	h->Navigate( (prefs.homeDir+"/help/"+t).c_str() );
 }
 
 void MainFrame::helpAutodoc(){
-	HtmlHelp *h=findHelp();
+	Htmlhelp *h=findHelp();
 	h->Navigate( (prefs.homeDir+"/help/autodoc.html").c_str() );
 }
 
 void MainFrame::helpBack(){
-	if( HtmlHelp *h=findHelp() ) h->GoBack();
+	if( Htmlhelp *h=findHelp() ) h->GoBack();
 }
 
 void MainFrame::helpForward(){
-	if( HtmlHelp *h=findHelp() ) h->GoForward();
+	if( Htmlhelp *h=findHelp() ) h->GoForward();
 }
 
 void MainFrame::helpAbout(){
@@ -932,7 +932,7 @@ void MainFrame::quick_Help(){
 			AfxMessageBox( ex.c_str(),MB_ICONWARNING );
 			return;
 		}
-		if( HtmlHelp *h=findHelp() ){
+		if( Htmlhelp *h=findHelp() ){
 			h->Navigate( url.c_str(),0,0 );
 		}
 	}

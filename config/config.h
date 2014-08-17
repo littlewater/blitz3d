@@ -3,6 +3,10 @@
 #define CONFIG_H
 
 #define BASE_VER	1108
+#define PRO			1
+
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_WARNINGS
 
 #ifdef	PRO
 #define	PRO_F	0x010000

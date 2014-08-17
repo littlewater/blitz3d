@@ -467,7 +467,7 @@ ddSurf *ddUtil::loadSurface( const std::string &f,int flags,gxGraphics *gfx ){
 	FREE_IMAGE_FORMAT fmt=FreeImage_GetFileType( f.c_str(),f.size() );
 	if( fmt==FIF_UNKNOWN ){
 		int n=f.find( "." );if( n==string::npos ) return 0;
-		fmt=FreeImage_GetFileTypeFromExt( f.substr(n+1).c_str() );
+		fmt = FreeImage_GetFIFFromFilename(f.substr(n + 1).c_str());
 		if( fmt==FIF_UNKNOWN ) return 0;
 	}
 	FIBITMAP *t_dib=FreeImage_Load( fmt,f.c_str(),0 );

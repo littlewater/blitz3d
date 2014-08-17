@@ -259,7 +259,7 @@ bool Editor::setText( istream &in ){
 	es.dwCookie=(DWORD)this;
 	es.dwError=0;
 	es.pfnCallback=streamIn;
-	is_line="{{\\colortbl;"+rtfbgr(prefs.rgb_string)+rtfbgr(prefs.rgb_ident)+
+	is_line="{\\rtf1\\ansi\\deff0 {\\colortbl;"+rtfbgr(prefs.rgb_string)+rtfbgr(prefs.rgb_ident)+
 	rtfbgr(prefs.rgb_keyword)+rtfbgr(prefs.rgb_comment)+rtfbgr(prefs.rgb_digit)+
 	rtfbgr(prefs.rgb_default)+"}";
 	int tabTwips=1440*8/GetDeviceCaps( ::GetDC(0),LOGPIXELSX ) * prefs.edit_tabs;

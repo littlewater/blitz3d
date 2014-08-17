@@ -2,21 +2,21 @@
 #ifndef HTMLHELP_H
 #define HTMLHELP_H
 
-class HtmlHelp;
+class Htmlhelp;
 
 class HelpListener{
 public:
-	virtual void helpOpen( HtmlHelp *help,const string &file )=0;
-	virtual void helpTitleChange( HtmlHelp *help,const string &title )=0;
+	virtual void helpOpen( Htmlhelp *help,const string &file )=0;
+	virtual void helpTitleChange( Htmlhelp *help,const string &title )=0;
 };
 
-class HtmlHelp : public CHtmlView{
+class Htmlhelp : public CHtmlView{
 public:
-	HtmlHelp( HelpListener *l ):listener(l){}
+	Htmlhelp( HelpListener *l ):listener(l){}
 
 	string getTitle();
 
-DECLARE_DYNAMIC( HtmlHelp )
+DECLARE_DYNAMIC( Htmlhelp )
 DECLARE_MESSAGE_MAP()
 
 	afx_msg BOOL OnEraseBkgnd( CDC *dc );

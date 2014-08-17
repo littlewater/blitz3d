@@ -369,7 +369,7 @@ static void parseMeshInfo( MeshModel *root,float curr_time ){
 	Vector pivot;
 	Animation anim;
 	unsigned short id=65535,parent=65535,flags1,flags2;
-	Box box( Vector(),Vector() );
+	Box box( (Vector()),(Vector()) );
 	Vector box_centre;
 	while( int chunk_id=nextChunk() ){
 		switch( chunk_id ){
